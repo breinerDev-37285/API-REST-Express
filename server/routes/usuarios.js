@@ -9,7 +9,7 @@ const _ = require('underscore')
 app.use( bodyParser.urlencoded({ extended: false }) )
 app.use( bodyParser.json() )
 
-/*app.get('/usuario', (req,res) => {
+app.get('/usuario', (req,res) => {
     
     let desde = Number(req.query.desde || 0 )
     let limite = Number(req.query.limite || 5 )
@@ -34,12 +34,7 @@ app.use( bodyParser.json() )
                     })
                 })
            })
-});*/
-
-app.get('/usuario',(req,res) =>{
-    res.send('get Usuario')
-})
-
+});
 
 app.post('/usuario',(req,res) => {
     let body = req.body
@@ -100,31 +95,6 @@ app.put('/usuario/:id', (req,res) => {
 
 app.delete('/usuario/:id', (req,res) => {
     let id = req.params.id
-    
-    // eliminacion para el registro de usuario en la base de datos
-
-    /*Usuario.findByIdAndRemove(id,(err,usuario)=>{
-        if(err){
-            return res.status(400).json({
-                ok: false,
-                err
-            })
-        }
-
-        if(!usuario){
-            return res.status(400).json({
-                ok: false,
-                message: 'usuario no existe'
-            })
-        }
-
-        res.json({
-            ok: true,
-            usuario
-        })
-    });*/
-
-
     /** cambio de estado a inactivo en los registros */
 
     Usuario.findByIdAndUpdate(id,{ estado:false },{ new:true },(err, usuario) => {
