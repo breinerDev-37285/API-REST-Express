@@ -9,7 +9,7 @@ const _ = require('underscore')
 app.use( bodyParser.urlencoded({ extended: false }) )
 app.use( bodyParser.json() )
 
-app.get('/usuario', (req,res) => {
+/*app.get('/usuario', (req,res) => {
     
     let desde = Number(req.query.desde || 0 )
     let limite = Number(req.query.limite || 5 )
@@ -34,7 +34,11 @@ app.get('/usuario', (req,res) => {
                     })
                 })
            })
-});
+});*/
+
+app.get('/usuario',(req,res) =>{
+    res.send('get Usuario')
+})
 
 
 app.post('/usuario',(req,res) => {
