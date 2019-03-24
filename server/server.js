@@ -4,9 +4,7 @@ const app = express();
 const colors = require('colors/safe')
 const mongoose = require('mongoose')
 
-app.use( require('./routes/usuarios') )
-
-
+app.use( require('./routes/index') )
 
 mongoose.connect(process.env.URLDB,{
     useCreateIndex: true,

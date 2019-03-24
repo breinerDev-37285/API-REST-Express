@@ -1,15 +1,15 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const Usuario = require('../models/usuarios')
+const Usuario = require('../models/usuario')
 const bcrypt = require('bcrypt')
 const _ = require('underscore')
-
+const { verificationToken,verificarAdminRole } = require('../middlewares/autenticacion')
 
 app.use( bodyParser.urlencoded({ extended: false }) )
 app.use( bodyParser.json() )
 
-app.get('/usuario', (req,res) => {
+app.get('/usuario', [verificationToken,verificarAdminRole], (req,res) => {
     
     let desde = Number(req.query.desde || 0 )
     let limite = Number(req.query.limite || 5 )
@@ -36,7 +36,7 @@ app.get('/usuario', (req,res) => {
            })
 });
 
-app.post('/usuario',(req,res) => {
+app.post('/usuario',verificationToken,(req,res) => {
     let body = req.body
 
     let usuario = new Usuario({
@@ -63,7 +63,7 @@ app.post('/usuario',(req,res) => {
     })
 })
 
-app.put('/usuario/:id', (req,res) => {
+app.put('/usuario/:id',verificationToken, (req,res) => {
     let id = req.params.id
     let objeto = _.omit(req.body,['password','email','google'])
     let opc = {
@@ -93,7 +93,7 @@ app.put('/usuario/:id', (req,res) => {
     });
 });
 
-app.delete('/usuario/:id', (req,res) => {
+app.delete('/usuario/:id',verificationToken,(req,res) => {
     let id = req.params.id
     /** cambio de estado a inactivo en los registros */
 

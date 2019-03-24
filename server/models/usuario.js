@@ -28,7 +28,7 @@ let usuarioSchema = new Schema({
     },
     estado: {
         type: Boolean,
-        default: true
+        default: false
     },
     role: {
         type: String,
@@ -53,4 +53,5 @@ usuarioSchema.methods.toJSON = function () {
 }
 
 
-module.exports = mongoose.model('usuario',usuarioSchema)
+
+module.exports = mongoose.model('Usuario', usuarioSchema);

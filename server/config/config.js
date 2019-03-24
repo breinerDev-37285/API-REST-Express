@@ -26,5 +26,14 @@ if(process.env.NODE_ENV === 'dev'){
 process.env.URLDB = urlDB
 
 
+/**
+ * semilla del token
+*/
 
+process.env.Semilla = process.env.TokenSeed || 'firma-semilla-desarrollo'
 
+/**
+ * Tiempo vencimiento del token
+*/
+
+process.env.VencimientoToken = process.env.TokenExp || '48h';
