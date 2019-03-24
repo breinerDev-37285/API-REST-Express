@@ -43,7 +43,8 @@ app.put('/upload/:tipo/:id',(req,res) => {
                 message: `solo se permiten los tipos: ${tipos.join(', ')}`
             })
         }else{
-            archivo.mv( `./uploads/${tipo}/${nombre}`, err => {
+            let pathUpload = path.resolve( __dirname,`../../uploads/${tipo}/${nombre}`  )
+            archivo.mv( pathUpload, err => {
                 if(err)
                     return res.status(500).json({
                         ok: false,
